@@ -15,7 +15,13 @@ const routes = [
     name: 'detail',
     
     component: () => import('../views/detail.vue')
-  }
+  },
+  {
+    path: '/baojia',
+    name: 'baojia',
+    
+    component: () => import('../views/baojia.vue')
+  },
 ]
 
 const router = new VueRouter({

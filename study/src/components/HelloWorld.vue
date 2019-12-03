@@ -6,18 +6,7 @@
         <p class="title">{{item.title}}</p>
         <!-- 渲染标题下边的内容 -->
         <div v-for="(item1,index1) in item.data" :key="index1" class="box12" @click="showDown(item1)">
-          <!-- {{item1}} -->
-            <!-- 内容盒子极渲染 -->
-          <!-- <van-popup v-model="show" position="right" :style="{ height: '100%' }" >
-            <div v-for="(item,index) in list3" :key="index" >
-              <p>{{item.Picture}}</p>
-            <p>{{item.AliasName}}</p>
-            <p>{{item.DealerPrice}}</p>
-            </div>
-            
-          </van-popup> -->
-          <!-- <van-popup v-model="show"  /> -->
-          <!-- 点击出现弹框 -->
+         
           <div v-for="(item1,index1) in item.data" :key="index1" class="content" >
             <p class="img">
             <img :src="item1.CoverPhoto" alt />  
@@ -51,12 +40,6 @@
 
 <script>
 import axios from "axios";
-// import { async } from 'q';
-// import Vue from "vue";
-// // import 'vant/libs/index.css';
-// import { Popup } from "vant";
-
-// Vue.use(Popup);
 export default {
   name: "HelloWorld",
   props: {
@@ -103,14 +86,10 @@ export default {
       .get("https://baojia.chelun.com/v2-car-getMasterBrandList.html")
       .then(res => {
         this.list = res.data.data;
-
-        // this.data=res.data.data
         console.log(this.list);
         // 截取字母开头的第一个字母
         this.list.forEach(item => {
           item.title = item.Spelling.slice(0, 1);
-          // console.log(item.title)
-          // console.log(this.list)
         });
         // 查看是否存在
         let data2 = [];
@@ -159,7 +138,6 @@ export default {
   overflow: auto;
 }
 .box1 {
-  // display: flex;
   border-bottom: 1px solid #ccc;
 }
 .box1 .title {
