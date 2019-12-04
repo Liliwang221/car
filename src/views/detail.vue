@@ -1,5 +1,6 @@
 <template>
 <div class="detail">
+  <!-- 每款车 -->
 <Bigimgs></Bigimgs>
 <Prices></Prices>
 <Content></Content>

@@ -1,5 +1,6 @@
 <template>
   <div class="bigimg">
+    <!-- 每款车的图片总数 -->
     <div class="swiper" @click="reduceimg">
      <img :src="detailList.CoverPhoto&&detailList.CoverPhoto"/>
      <p class="p">{{detailList.pic_group_count&&detailList.pic_group_count}}张照片</p>

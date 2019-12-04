@@ -1,9 +1,10 @@
 <template>
   <div class="content">
+      <!-- 详情页内tab切换 -->
     <div class="tab">
       <span v-for="(item,index) in listData" :key="index" @click="tabclickFn(index)" :class="listIndex===index?'active':''">{{item}}</span>
     </div>
-    
+    <!-- 车款底价咨询 -->
     <div class="context">
         <div class="countext" v-for="(item,index) in detailList.list&&detailList.list" :key="index">
         <div class="text">
@@ -104,7 +105,7 @@ export default {
 }
 .content .context .wrapper .wrap .left p{
     color:#3D3D3D;
-    font-size: 15px;
+    font-size: 14px;
     padding:10px 0 10px 10px;
 }
 .content .context .wrapper .wrap .left span{
