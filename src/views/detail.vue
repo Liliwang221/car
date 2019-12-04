@@ -12,6 +12,7 @@
 </template>
 
 <script>
+
 import Bigimgs from "./detail/bigimg"
 import Prices from "./detail/price"
 import Content from "./detail/content"
