@@ -1,23 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
 import Detail from "../views/detail"
 Vue.use(VueRouter)
 const Colorimg=()=>import("../views/colorimg")
-
+const Colors=()=>import("../views/colorimg/colors")
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
+  // {
+  //   path: '/',
+  //   name: 'home',
+  //   component: Home
+  // },
   {
     path:"/detail",
     component:Detail
   },{
     path:"/colorimg",
     component:Colorimg
+  },{
+    path:'/colors',
+    component:Colors
   }
   // {
   //   path: '/detail',

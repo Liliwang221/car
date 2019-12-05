@@ -1,5 +1,6 @@
 <template>
   <div class="pricec">
+    <!-- 车款价格信息 -->
 <div class="info">
      <div class="prices">
        <p>{{detailList.market_attribute&&detailList.market_attribute.dealer_price}}</p>

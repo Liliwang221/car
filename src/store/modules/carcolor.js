@@ -1,17 +1,19 @@
 import {getcolorList} from "@/services/index"
 const state={
-    colorList:{}
+    colorList:{},
+    
 }
 const mutations={
     setcolorList(state,payload){
-        state.colorList=payload
+        let list=Object.keys(payload)
+        state.colorList=payload 
     }
 }
 const actions={
    async getcolorList({commit},payload){
     let res=await getcolorList(payload)
-    console.log(res)
-    commit("setcolorList",res.data)
+    console.log(res.data.data)
+    commit("setcolorList",res.data.data)
     }
 }
 export default{

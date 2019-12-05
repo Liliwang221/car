@@ -1,5 +1,6 @@
 <template>
 <div class="detail">
+  <!-- 每款车 -->
 <Bigimgs></Bigimgs>
 <Prices></Prices>
 <Content></Content>
@@ -11,6 +12,7 @@
 </template>
 
 <script>
+
 import Bigimgs from "./detail/bigimg"
 import Prices from "./detail/price"
 import Content from "./detail/content"
