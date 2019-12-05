@@ -8,6 +8,7 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+
 // import First from '@/components/first.vue'
 
 export default {
@@ -15,6 +16,7 @@ export default {
   components: {
     HelloWorld
     // First
-  }
+  },
+  
 }
-</script>
+</script>+
