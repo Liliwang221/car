@@ -6,6 +6,10 @@
       <div class="allyear">
           <p v-for="(item,index) in list" :key="index">{{item}}</p>
       </div> 
+
+      <div class="box">
+        红色
+      </div>
       <!-- {{colorList}} -->
       
   </div>
@@ -68,5 +72,10 @@ export default {
   width:50px;
   text-align: center;
   
+}
+.colors .box{
+  width:100%;
+  height:50px;
+  background:#fff;
 }
 </style>
