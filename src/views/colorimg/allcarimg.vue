@@ -4,7 +4,7 @@
     <div class="smallImg" v-for="(item,index) in allcarimgList" :key="index">
       <div class="imgs" v-for="(ite,i) in item.List" :key="i">
          <!-- <img :src="ite.Url"/>  -->
-         {{ite.HighSize}}
+         <!-- {{ite.HighSize}} -->
       </div>
 
     </div>
