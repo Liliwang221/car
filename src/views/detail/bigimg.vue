@@ -18,7 +18,7 @@ export default {
     },
     methods:{
         ...mapActions({
-            getdetailList:"detail/getdetailList"
+            getdetailList:"detail/getdeta ilList"
         }),
         reduceimg(){
           this.$router.push("/colorimg")

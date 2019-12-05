@@ -10,7 +10,7 @@ const mutations={
 const actions={
     async getAllcarimgList({commit},payload){
         let res=await getAllcarimgList(payload)
-        console.log(res.data.data)
+        console.log("tupian",res.data.data)
         commit("setAllcarimgList",res.data.data)
     }
 }

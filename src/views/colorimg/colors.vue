@@ -1,43 +1,68 @@
 <template>
   <div class="colors">
-      <div class="allcolor" @click="carColorFn">
+      <div class="allcolor">
           <p>全部颜色</p>
       </div>
+      <!-- 年份tab切换 -->
       <div class="allyear">
-          <p v-for="(item,index) in list" :key="index">{{item}}</p>
+          <p v-for="(item, index, key) of colorList" :key="index" @click="yearColorFn(item,key)"  :class="keyIndex==key?'active':''">{{index}}</p>
       </div> 
-
-      <div class="box">
-        红色
+      <!-- 颜色 -->
+      <div class="colorBox">
+        <ul>
+          <li v-for="(item,index) in lists" :key="index" @click="colorFun(item.ColorId)"><p :style="{background:item.Value}"></p> {{item.Name}}</li>
+        </ul>
       </div>
-      <!-- {{colorList}} -->
-      
   </div>
 </template>
 
 <script>
 import {mapState,mapActions} from "vuex"
+import axios from "axios"
 export default {
+  data(){
+    return{
+      lists:[],
+      keyIndex:0,
+      // data:[]
+      ColorId:""
+    }
+  },
     computed: {
     ...mapState({
        colorList:state=>state.carcolor.colorList,
-    }),
-    list(){
-      return Object.keys(this.colorList)
-    }
-    
+       list:state=>state.carcolor.list,
+    })
   },
   methods:{
     ...mapActions({
      getcolorList:"carcolor/getcolorList"
+     
     }),
-    carColorFn(){
-        this.$router.push("/colorimg")
+    yearColorFn(item,key){
+     this.lists=item
+        this.keyIndex=key
+    },
+    colorFun(ColorId){
+      this.ColorId=ColorId
+      this.$emit('update:showColor', false)
     }
   },
   created(){
-    // console.log(this.$store)
-    this.getcolorList()
+    this.yearColorFn(this.list[0],0)
+  // let {serialId} = this.$route.query;
+  // console.log(this.$route)
+ let serialId=2593
+    axios.get(`http://baojia.chelun.com/v2-car-getModelImageYearColor.html?SerialID=${2593}`).then(res=>{
+      // window.console.log(res.data.data)
+      // this.list=res.data.data
+      // let obj=JSON.parse(JSON.stringify(this.list))
+      // let arr=Object.values(obj)
+      // this.handleC(arr[0],0)
+      console.log(res)
+     }
+    )
+     this.getcolorList(serialId,this.ColorId)
   }
 }
 </script>
@@ -56,7 +81,7 @@ export default {
     line-height:40px;
     color:#00AFFF;
     font-size: 17px;
-    margin-bottom:5px;
+    margin-bottom:10px;
 }
 .colors .allyear{
     width:100%;
@@ -67,15 +92,41 @@ export default {
     flex-wrap: nowrap;
     background:#fff;
     overflow-x:scroll;
+     margin-bottom:10px;
 }
 .colors .allyear p{
-  width:50px;
+  width:60px;
   text-align: center;
+   flex-shrink: 0;
+}
+.colors .allyear .active{
+  color:#00AFFF;
+}
+.colors .transition{
+  transition:tranlate()
+}
+.colors .colorBox{
+  width:100%;
+  background:#fff;
+}
+.colors .colorBox ul{
+  width:100%;
+  display:flex;
+  flex-wrap: wrap;
   
 }
-.colors .box{
-  width:100%;
-  height:50px;
-  background:#fff;
+.colors .colorBox ul li{
+  width:45%;
+  height:35px;
+  border:1px solid #9CD5FF;
+  display: flex;
+  align-items: center;
+  margin:10px 5px;
+}
+.colors .colorBox ul li p{
+  width:20px;
+  height:20px;
+  background:#9CD5FF;
+  margin:0 10px;
 }
 </style>
