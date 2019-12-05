@@ -54,11 +54,7 @@ export default {
   // console.log(this.$route)
  let serialId=2593
     axios.get(`http://baojia.chelun.com/v2-car-getModelImageYearColor.html?SerialID=${2593}`).then(res=>{
-      // window.console.log(res.data.data)
-      // this.list=res.data.data
-      // let obj=JSON.parse(JSON.stringify(this.list))
-      // let arr=Object.values(obj)
-      // this.handleC(arr[0],0)
+      
       console.log(res)
      }
     )
