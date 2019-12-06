@@ -16,16 +16,18 @@
        
        <!-- 弹框 -->
           <div class="dialog" v-show="show">
-             <div  v-for="(item,index) in dataList.data" :key="index" >
-              <p class="GroupName">{{item.GroupName}}</p>
+             <div  v-for="(item,index) in dataList.data" :key="index">
+                  <!-- {{item}} -->
+              <!-- <p class="GroupName">{{item.GroupName}}</p> -->
               
               <!-- {{item.GroupList}} -->
-              <div v-for="(item1,index1) in item.GroupList" :key="index1" class="content1">
+              <div v-for="(item1,index1) in item.GroupList" :key="index1" class="content1"  @click="toDetail(item1.SerialID)">
               <!-- {{item1}} -->
                    <p class="img">
                       <img :src="item1.Picture" alt />  
                 </p>
                   <div class="left">
+
                     <p>{{item1.AliasName}}</p>
                     <p>{{item1.DealerPrice}}</p>
                   </div> 
@@ -80,8 +82,13 @@ export default {
        console.log(id)
         this.show=true,
        this.getMakeListByMasterBrandId(id);
-      //  console.log(this.$store.state.dataList);
+       console.log(this.$store.state.dataList);
 
+      },
+      //跳转到详情页面
+      toDetail(SerialID){
+        console.log(SerialID)
+        this.$router.push({path:'/detail',params:SerialID})
       }
   },
   created(){
@@ -154,12 +161,20 @@ export default {
   border-bottom: 1px solid #ddd;
 }
 .content1 .img img{
-  width: 80px;
+  width: 100px;
   height: 80px;
 }
 .left{
   margin-left: 15px;
-  margin-top: 10px;
+  margin-top: 15px;
+}
+.left p:nth-child(1){
+  color: #888;
+  font-size: 18px;
+}
+.left p:nth-child(2){
+  color: red;
+  font-size: 15px;
 }
 .GroupName{
   width: 100%;
