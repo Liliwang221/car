@@ -29,7 +29,6 @@ export default {
     methods:{
       colorFn(){
         this.showColor=true
-        
       }
     }
 }

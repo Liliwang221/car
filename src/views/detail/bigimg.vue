@@ -18,10 +18,13 @@ export default {
     },
     methods:{
         ...mapActions({
-            getdetailList:"detail/getdeta ilList"
+            getdetailList:"detail/getdetailList"
         }),
+       
         reduceimg(){
-          this.$router.push("/colorimg")
+          // this.$router.push({path:"/colorimg",params:{SerialID:2593}})
+           this.$router.push({path:'/colorimg'})
+          //  console.log(this.$route.params)
         }
     },
     created(){
