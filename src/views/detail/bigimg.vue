@@ -24,7 +24,6 @@ export default {
         reduceimg(){
           // this.$router.push({path:"/colorimg",params:{SerialID:2593}})
            this.$router.push({path:'/colorimg'})
-          //  console.log(this.$route.params)
         }
     },
     created(){

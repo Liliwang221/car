@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import {mapState,mapActions} from "vuex"
+import {mapState,mapMutations} from "vuex"
 
 export default {
   data(){
@@ -35,23 +35,22 @@ export default {
     })
   },
   methods:{
-    ...mapActions({
-     getcolorList:"carcolor/getcolorList"
+    ...mapMutations({
+     setColorId:"allcarimg/setColorId"
     }),
     yearColorFn(item,key){
         this.lists=item
         this.keyIndex=key
     },
     colorFun(ColorId){
-      console.log(ColorId)
-      this.ColorId=ColorId
+      this.setColorId(ColorId)
       this.$emit('update:showColor', false)
     }
   },
   created(){
     this.yearColorFn(this.list[0],0)
  
-     this.getcolorList(this.ColorId)
+    //  this.getcolorList(this.ColorId)
   }
 }
 </script>

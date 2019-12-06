@@ -1,9 +1,7 @@
 import {getcolorList} from "@/services/index"
-// import {getAllcarimgList} from "@/services/index"
 const state={
     colorList:{},
     list:[],
-    
 }
 const mutations={
     setcolorList(state,payload){
@@ -14,13 +12,9 @@ const mutations={
     }
 }
 const actions={
-    
    async getcolorList({commit},payload){
     let res=await getcolorList(payload)
-    console.log(commit.payload)
     commit("setcolorList",res.data.data)
-    
-    // getAllcarimgList(params)
     }
 }
 export default{

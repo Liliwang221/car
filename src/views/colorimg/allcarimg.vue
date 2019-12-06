@@ -18,7 +18,6 @@
 
 <script>
 import {mapState,mapActions} from "vuex"
-// import axios from "axios"
 export default {
   computed:{
     ...mapState({
@@ -31,13 +30,7 @@ export default {
     })
   },
   created(){
-    //  let {SerialID} = this.$route.query;
-    //  console.log(this.$route)
-    // axios.get("http://baojia.chelun.com/v2-car-getModelImageYearColor.html?SerialID="+SerialID).then(res=>{
-    //   console.log(res)
-    //  }
-    // )
-    this.getAllcarimgList()
+    this.getAllcarimgList(2593)
   }
 }
 </script>
