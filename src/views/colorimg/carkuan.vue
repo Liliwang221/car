@@ -33,4 +33,10 @@ export default {
     line-height:35px;
     text-align: center;
 }
+.styles .content{
+    width:100%;
+}
+.styles .content .wrap{
+    width:100%;
+}
 </style>
