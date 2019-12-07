@@ -1,199 +1,140 @@
 <template>
-  <div class="hello">
-    <div class="box">
-      <div v-for="(item,index) in list " :key="index" class="box1">
-        <!-- 渲染ABCD -->
+  <div class="Hello">
+    <div class="box" >
+      <!-- {{list.data}} -->
+      <div v-for="(item,index) in list" :key="index" class="box1">
+
         <p class="title">{{item.title}}</p>
-        <!-- 渲染标题下边的内容 -->
-        <div v-for="(item1,index1) in item.data" :key="index1" class="box12" @click="showDown(item1)">
-          <!-- {{item1}} -->
-            <!-- 内容盒子极渲染 -->
-          <!-- <van-popup v-model="show" position="right" :style="{ height: '100%' }" >
-            <div v-for="(item,index) in list3" :key="index" >
-              <p>{{item.Picture}}</p>
-            <p>{{item.AliasName}}</p>
-            <p>{{item.DealerPrice}}</p>
-            </div>
-            
-          </van-popup> -->
-          <!-- <van-popup v-model="show"  /> -->
-          <!-- 点击出现弹框 -->
-          <div v-for="(item1,index1) in item.data" :key="index1" class="content" >
+        
+          <div v-for="(item1,index1) in item.children" :key="index1" class="content"  @click="showDown(item1.MasterID)">
             <p class="img">
             <img :src="item1.CoverPhoto" alt />  
           </p>
           <p class="name">{{item1.Name}}</p>
           </div>
-          <!-- 弹窗 -->
-          <div class="dialog" v-show="show" >
-            <div v-for="(item,index) in list3" :key="index">
-            <p>{{item.GroupName}}</p>
-            <div v-for="(item1,index1) in item.GroupList" :key="index1" class="content1">
-               <p class="img">
-            <img :src="item1.CoverPhoto" alt />  
-          </p>
-          <div class="left" @click="turn">
-            <p>{{item1.AliasName}}</p>
-            <p>{{item1.DealerPrice}}</p>
-          </div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
+          
+       
+       <!-- 弹框 -->
+          <div class="dialog" v-show="show">
+             <div  v-for="(item,index) in dataList.data" :key="index">
+                  <!-- {{item}} -->
+              <!-- <p class="GroupName">{{item.GroupName}}</p> -->
+              
+              <!-- {{item.GroupList}} -->
+              <div v-for="(item1,index1) in item.GroupList" :key="index1" class="content1"  @click="toDetail(item1.SerialID)">
+              <!-- {{item1}} -->
+                   <p class="img">
+                      <img :src="item1.Picture" alt />  
+                </p>
+                  <div class="left">
 
-      <div class="box2">
-        <a :href="'#'+{item}" v-for="(item,index) in list2" :key="index">{{item}}</a>
+                    <p>{{item1.AliasName}}</p>
+                    <p>{{item1.DealerPrice}}</p>
+                  </div> 
+             </div>
+            </div>
+          </div>
+           <!-- 右侧数据 -->
+       <div class="right">
+         <span v-for="(item,index) in arr" :key="index">{{item}}</span>
       </div>
+      </div>
+     
+      
+        
+         
+       
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-// import { async } from 'q';
-// import Vue from "vue";
-// // import 'vant/libs/index.css';
-// import { Popup } from "vant";
-
-// Vue.use(Popup);
+import {mapActions,mapState} from 'vuex'
 export default {
-  name: "HelloWorld",
-  props: {
-    msg: String
-  },
-  data() {
-    return {
-      //弹框的显示及隐藏
-      show: false, 
-      //渲染数据
-      list: [],
-      //装标题以下内容的盒子
-      list2: [
-        "#",
-        "A",
-        "B",
-        "C",
-        "D",
-        "F",
-        "G",
-        "H",
-        "J",
-        "K",
-        "L",
-        "M",
-        "N",
-        "O",
-        "Q",
-        "R",
-        "S",
-        "T",
-        "W",
-        "X",
-        "Y",
-        "Z"
-      ],
-      //装弹框内容的盒子
-      list3:[]
-    };
-  },
-  created() {
-    //渲染主页面的所有内容
-    axios
-      .get("https://baojia.chelun.com/v2-car-getMasterBrandList.html")
-      .then(res => {
-        this.list = res.data.data;
-
-        // this.data=res.data.data
-        console.log(this.list);
-        // 截取字母开头的第一个字母
-        this.list.forEach(item => {
-          item.title = item.Spelling.slice(0, 1);
-          // console.log(item.title)
-          // console.log(this.list)
-        });
-        // 查看是否存在
-        let data2 = [];
-        this.list.filter(item => {
-          if (data2.findIndex(val => item.title == val.title) == -1) {
-            data2.push({
-              title: item.title
-            });
-          }
-        });
-        // 截取的与ABCD是否一样
-        data2.forEach(item => {
-          item.data = this.list.filter(
-            val => val.Spelling.slice(0, 1) == item.title
-          );
-        });
-        this.list = data2;
-
-        console.log(this.list);
-      });
+  data(){
+    return{
+      show:false,
       
-    // console.log(this.list)
-  },
-  methods: {
-    // 弹框
-     showDown(item1){
-       console.log(item1);
-       axios.get(`https://baojia.chelun.com/v2-car-getMakeListByMasterBrandId.html?MasterID=${item1.MasterID}`).then(res=>{
-         this.list3=res.data.data
-         console.log(this.list3)
-       })
-      this.show=true;
-    },
-    turn(){
-      this.$router.push('/detail')
+
     }
+  },
+  computed:{//vue中的自动计算属性
+  //...mapstate 是从vuex解构出来的
+    ...mapState({
+        //store 下index抛出的分仓库home,home下的state里的list
+      list:state=>state.home.list,
+      dataList:state=>state.home.dataList,
+      
+      arr:state=>state.home.arr
+      
+    })
+    
+  },
+  methods:{
+    //页面中请求数据
+    //调用仓库中actions中定义的方法
+    ...mapActions({
+      getMasterBrandList:'home/getMasterBrandList',
+      getMakeListByMasterBrandId:'home/getMakeListByMasterBrandId',
+     
+    }),
+     showDown(id){
+       console.log(id)
+        this.show=true,
+       this.getMakeListByMasterBrandId(id);
+       console.log(this.$store.state.dataList);
+
+      },
+      //跳转到详情页面
+      toDetail(SerialID){
+        console.log(SerialID)
+        this.$router.push({path:'/detail',params:SerialID})
+      }
+  },
+  created(){
+    this.getMasterBrandList();
+    
+    
   }
-};
+  
+}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-.hello {
+<style scoped>
+
+.hello{
   width: 100%;
   height: 100%;
   overflow: auto;
 }
-.box1 {
-  // display: flex;
-  border-bottom: 1px solid #ccc;
+.box{
+  position: relative;
 }
-.box1 .title {
-  background: #ccc;
-}
-.van-cell__value  {
-  display: flex;
+.box1 .title{
+  width: 100%;
+  height: 30px;
+  background: #ddd;
 }
 .content{
   display: flex;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #ddd;
+  line-height: 50px;
+  /* line-height: 50px; */
 }
-.content1{
-  display: flex;
-}
-.left{
-  margin-left: 20px;
-}
-.box12 .name{
-  // float: left;
-  display: flex;
+.content img{
+   width: 2.4rem;
+  height: 2.4rem;
   margin-left: 10px;
+  margin-top: 10px;
+} 
+.name{
+  margin-left: 20px;
+  margin-top: 5px;
 }
-.img img {
-  width: 50px;
-  height: 30px;
-  // float: left;
-}
-
- 
-.name {
-  margin-left: 15px;
-}
-.box2 {
-  width: 15px;
+.right{
+ width: 15px;
   height: 200px;
   display: flex;
   flex-direction: column;
@@ -201,18 +142,44 @@ export default {
   top: 200px;
   left: 350px;
 }
-.box2 a {
-  text-decoration: none;
-  color: #000;
+.right span{
+  color: #888;
+  font-size: 0.7rem;
+  margin: 3px 0;
 }
 .dialog{
   width: 70%;
   height: 100%;
-  background: #ccc;
+  background: #fff;
   position: fixed;
   top: 0;
   right: 0;
   overflow: auto;
 }
-
+.content1{
+  display: flex;
+  border-bottom: 1px solid #ddd;
+}
+.content1 .img img{
+  width: 100px;
+  height: 80px;
+}
+.left{
+  margin-left: 15px;
+  margin-top: 15px;
+}
+.left p:nth-child(1){
+  color: #888;
+  font-size: 18px;
+}
+.left p:nth-child(2){
+  color: red;
+  font-size: 15px;
+}
+.GroupName{
+  width: 100%;
+  height: 30px;
+  background: #ccc;
+  line-height: 30px;
+}
 </style>
