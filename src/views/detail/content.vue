@@ -52,12 +52,7 @@ export default {
          tabclickFn(index){
    this.listIndex=index
   },
-    },
-    created(){
-    //获取详情数据
-    // console.log(this.$store)
-    this.getdetailList()
-  }
+    }
 }
 </script>
 

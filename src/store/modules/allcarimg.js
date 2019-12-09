@@ -18,7 +18,6 @@ const mutations={
 const actions={
     async getAllcarimgList({commit},payload){
         let params = {SerialID:payload};
-        console.log(payload)
         // 判断是否选择颜色
         if (state.colorId){
           params.ColorID = state.colorId;
@@ -28,7 +27,8 @@ const actions={
           params.CarId = state.carId;
         }
         let res=await getAllcarimgList(params)
-        commit("setAllcarimgList",res.data.data)
+        console.log(res.data.data)
+        commit("setAllcarimgList",res.data)
     }
 }
 

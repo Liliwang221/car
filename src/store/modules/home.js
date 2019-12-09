@@ -11,17 +11,17 @@ const mutations={
     updateList(state,payload){
         //state里的list 进行赋值
         state.list=payload
-        console.log(state.list)
+        // console.log(state.list)
     },
 
     dialogList(state,payload){
-        console.log(payload.data)
+        // console.log(payload.data)
         state.dataList=payload.data
         // console.log(state.dataList)
     },
     //右边列表数据
     setArr(state,data){
-        console.log(data)
+        // console.log(data)
         state.arr=['#'].concat([...new Set(data.data.map(item=>{
             return item.Spelling[0];
         }))])
@@ -30,18 +30,18 @@ const mutations={
     // 标题
     setList(state,data){
         let newarr=state.arr;
-        let newList=newarr.slice(1).map((ele,index)=>{
-            console.log(index)
+        let newList=newarr.slice(1).map((ele)=>{
+            // console.log(index)
             return{
                 title:ele,
-                children:data.data.filter((item,index)=>{
-                    console.log(index)
+                children:data.data.filter((item)=>{
+                    // console.log(index)
                     return item.Spelling.slice(0,1)===ele;
                 })
             }
         })
         state.list=newList
-        console.log(newList)
+        // console.log(newList)
     }
 }
 const actions={

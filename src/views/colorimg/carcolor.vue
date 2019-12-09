@@ -1,14 +1,13 @@
 <template>
   <div class="carcolor">
     <div class="c-type">
-      <p @click="colorFn">颜色</p>|
+      <p @click="colorFn">{{colored}}</p>|
       <p @click="carkuanFn">款式</p>
     </div>
 
     <transition name="scroll-top">
       <div class="wrap" v-if="showColor">
-        <Color :showColor.sync="showColor"></Color>
-        <Carkuan :showCar.sync="showCar"></Carkuan>
+        <Color :showColor.sync="showColor" :a.sync="colored"></Color>
       </div>
     </transition>
 
@@ -31,13 +30,20 @@ export default {
   data(){
     return{
       showColor:false,
-      showCar:false
+      showCar:false,
+      colored:"颜色"
     }
   },
     props:["chuan"],
     watch:{
       showColor(){
-       this.getAllcarimgList(2593)
+        let ids=this.$route.query.SerialID
+        if(ids instanceof String){
+          alert("")
+        }else{
+          let id=ids*1
+           this.getAllcarimgList(id)
+        }
       }
   },  
     methods:{
@@ -45,15 +51,23 @@ export default {
         this.showColor=true
       },
       carkuanFn(){
-        console.log(123)
         this.showCar=true
+      },
+      colorFuns(colorname){
+        this.colored=colorname
       },
       ...mapActions({
       getAllcarimgList:"allcarimg/getAllcarimgList"
     })
     },
     created(){
-      this.getAllcarimgList(2593)
+      let ids=this.$route.query.SerialID
+        if(ids instanceof String){
+          alert("")
+        }else{
+          let id=ids*1
+           this.getAllcarimgList(id)
+        }
     }
 }
 
@@ -66,6 +80,11 @@ export default {
   height:40px;
   background:#fff;
   margin-bottom:10px;
+ position:-webkit-sticky;
+ position:sticky;
+ top:0;
+ left:0;
+ z-index: 999999999999;
 }
 .carcolor .c-type{
   width:100%;

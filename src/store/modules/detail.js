@@ -63,14 +63,11 @@ const mutations = {
             } else {
                 currentList = payload.list.filter(item => item.market_attribute.year == state.current);
             }
-
             // 给当前年份数据排序
-            currentList = sortCarList(currentList);
-
+            currentList = sortCarList(currentList)
             // 聚合key相同的车款数据
             currentList = formatCarList(currentList);
             state.currentList = currentList;
-            console.log(currentList)
         } else {
             alert(payload.msg)
         }
@@ -79,8 +76,8 @@ const mutations = {
 
 const actions = {
     async getdetailList({ commit }, payload) {
-        let res = await getdetailList(payload)
-        commit("upList", res.data.data)
+            let res = await getdetailList(payload)
+            commit("upList", res.data.data)
     }
 }
 

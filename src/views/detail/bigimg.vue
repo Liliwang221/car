@@ -2,9 +2,11 @@
   <div class="bigimg">
     <!-- 每款车的图片总数 -->
     <div class="swiper" @click="reduceimg">
-     <img :src="detailList.CoverPhoto&&detailList.CoverPhoto"/>
+     <img :src="detailList.Picture&&detailList.Picture"/>
      <p class="p">{{detailList.pic_group_count&&detailList.pic_group_count}}张照片</p>
    </div>
+<!-- {{detailList}} -->
+
   </div>
 </template>
 
@@ -20,16 +22,20 @@ export default {
         ...mapActions({
             getdetailList:"detail/getdetailList"
         }),
-       
         reduceimg(){
-          // this.$router.push({path:"/colorimg",params:{SerialID:2593}})
-           this.$router.push({path:'/colorimg'})
+           this.$router.push({path:'/colorimg',query:{SerialID:this.$route.query.SerialID}})
         }
     },
     created(){
     //获取详情数据
-    // console.log(this.$store)
-    this.getdetailList()
+       let ids=this.$route.query.SerialID
+      if(ids instanceof String){
+        alert("")
+      }{
+        let id=ids*1
+      this.getdetailList(id)
+      }
+    // this.getdetailList(this.$route.query.SerialID)
   }
 }
 </script>

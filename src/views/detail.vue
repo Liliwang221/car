@@ -19,7 +19,8 @@ import Content from "./detail/content"
 export default {
  components:{
       Bigimgs,Prices,Content
-    }
+    },
+    
 }
 </script>
 
@@ -30,6 +31,7 @@ export default {
   background: #eee;
   overflow-y: auto;
   position: relative;
+  /* overflow: hidden; */
 }
 .detail .footer{
   width:100%;

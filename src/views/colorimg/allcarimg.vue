@@ -1,8 +1,8 @@
 
 <template>
   <div class="allcarimg">
-
-    <div class="smallImg" v-for="(item,index) in allcarimgList" :key="index">
+    <div class="box" v-if="allcarimgList.msg=='成功'">
+    <div class="smallImg" v-for="(item,index) in allcarimgList.data" :key="index">
       <!-- 渲染汽车展示小图片 -->
       <div class="imgs" v-for="(ite,i) in item.List" :key="i">
         <img :src="ite.Url.replace('{0}',1)"/>
@@ -12,6 +12,9 @@
             <p class="p">{{item.Name}}</p>
              <p>{{item.Count}}></p>
         </div> 
+      </div>
+    </div><div class="wrap" v-else>
+      <p>还没有内容</p>
     </div>
   </div>
 </template>
@@ -19,6 +22,11 @@
 <script>
 import {mapState,mapActions} from "vuex"
 export default {
+  data(){
+    return{
+      // id:0
+    }
+  },
   computed:{
     ...mapState({
       allcarimgList:state=>state.allcarimg.allcarimgList
@@ -30,16 +38,23 @@ export default {
     })
   },
   created(){
-    this.getAllcarimgList(2593)
+   let ids=this.$route.query.SerialID
+  if(ids instanceof String){
+    alert("")
+  }{
+    let id=ids*1
+  this.getAllcarimgList(id)
   }
-}
+    
+  }
+} 
 </script>
 
 <style scoped>
 .allcarimg{
   width:100%;
  height:95%;
-  overflow-y: scroll;
+
   background:#fff;
 }
 .allcarimg .smallImg{
@@ -48,6 +63,7 @@ export default {
    flex-wrap: wrap;
    justify-content: space-between;
    position:relative;
+     overflow-y: scroll;
 }
 .allcarimg .smallImg .imgs{
   width:32.5%;
@@ -68,5 +84,10 @@ export default {
 }
 .allcarimg .smallImg .reduce .p{
   margin-top:20px;
+}
+.allcarimg .wrap{
+  width:100%;
+  text-align: center;
+  margin: 0 auto;
 }
 </style>

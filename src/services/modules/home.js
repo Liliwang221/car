@@ -5,8 +5,6 @@ export let getMasterBrandList=()=>{
 }
 //获取弹框列表
 export let getMakeListByMasterBrandId=(id)=>{
-    console.log(id)
-
     return request(`/v2-car-getMakeListByMasterBrandId.html?MasterID=${id}`)
 
 }

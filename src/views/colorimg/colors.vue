@@ -10,7 +10,7 @@
       <!-- 颜色 -->
       <div class="colorBox">
         <ul>
-          <li v-for="(item,index) in lists" :key="index" @click="colorFun(item.ColorId)"><p :style="{background:item.Value}"></p> {{item.Name}}</li>
+          <li v-for="(item,index) in lists" :key="index" @click="colorFun(item.ColorId,item.Name)"><p :style="{background:item.Value}"></p> {{item.Name}}</li>
         </ul>
       </div>
   </div>
@@ -20,12 +20,12 @@
 import {mapState,mapMutations} from "vuex"
 
 export default {
+  props:["showColor","a"],
   data(){
     return{
       lists:[],
       keyIndex:0,
-      // data:[]
-      ColorId:""
+      ColorId:"",
     }
   },
     computed: {
@@ -42,15 +42,23 @@ export default {
         this.lists=item
         this.keyIndex=key
     },
-    colorFun(ColorId){
-      this.setColorId(ColorId)
+    colorFun(ColorId,colorname){
+      //汽车颜色
+      this.$emit("update:a",colorname)
+
+      //汽车图片id
+      if(ColorId instanceof String){
+        alert("")
+      }else{
+        let id=ColorId*1
+         this.setColorId(id)
+      }
       this.$emit('update:showColor', false)
+      
     }
   },
   created(){
-    this.yearColorFn(this.list[0],0)
- 
-    //  this.getcolorList(this.ColorId)
+    this.yearColorFn(this.list[0],0);
   }
 }
 </script>

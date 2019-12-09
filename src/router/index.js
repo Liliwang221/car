@@ -5,8 +5,13 @@ import Detail from "../views/detail"
 Vue.use(VueRouter)
 const Colorimg=()=>import("../views/colorimg")
 // const Colors=()=>import("../views/colorimg/colors")
-
+const Home=()=>import("../components/HelloWorld")
 const routes = [
+  {
+    path:"/home",
+    // name:"Home",
+    component:Home
+  },
   {
     path:"/detail",
     component:Detail
