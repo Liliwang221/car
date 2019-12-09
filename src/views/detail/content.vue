@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapState,mapActions } from "vuex";
+import { mapState,mapActions, mapMutations } from "vuex";
 export default {
     data(){
         return{
@@ -45,7 +45,8 @@ export default {
         ...mapState({
             detailList:state=>state.detail.detailList,
             year:state=>state.detail.year,
-            currentList:state=>state.detail.currentList
+            currentList:state=>state.detail.currentList,
+            current:state=>state.detail.current
         }),
         years(){
               var x = new Set(this.year);
@@ -54,21 +55,18 @@ export default {
     },
     methods:{
         ...mapActions({
-            getdetailList:"detail/getdetailList"
+            getdetailList:"detail/getdetailList",
+
         }),
         reduceimg(){
           this.$router.push("/colorimg")
         },
+        ...mapMutations({setCurrent:"detail/setCurent"}),
          tabclickFn(index,item){
          this.listIndex=index
-
-           console.log(item)
-        //  let array=this.detailList.value
-         
-        //  let arr=this.detailList.filter(ite=>ite.list.map(it=>it.market_attribute.year==item))
-        //   this.data.push(arr)
-        //  console.log(array)
-         
+            this.setCurrent(item)
+            this.getdetailList(this.$route.query.SerialID)
+          
         },
     }
 }

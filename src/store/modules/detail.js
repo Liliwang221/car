@@ -71,6 +71,9 @@ const mutations = {
         } else {
             alert(payload.msg)
         }
+    },
+    setCurent(state,payload){
+        state.current=payload
     }
 }
 

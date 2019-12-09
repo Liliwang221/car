@@ -1,5 +1,6 @@
 <template>
-  <div class="styles">
+<div class="wrap"></div>
+  <!-- <div class="styles">
       <div class="allinfo">
           <p>全部款式</p>
       </div>
@@ -24,7 +25,7 @@
             </div>
             
         </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
