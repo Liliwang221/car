@@ -18,7 +18,7 @@
           <div class="dialog" v-show="show">
              <div  v-for="(item,index) in dataList.data" :key="index">
                   <!-- {{item}} -->
-              <!-- <p class="GroupName">{{item.GroupName}}</p> -->
+              <p class="GroupName">{{item.GroupName}}</p>
               
               <!-- {{item.GroupList}} -->
               <div v-for="(item1,index1) in item.GroupList" :key="index1" class="content1"  @click="toDetail(item1.SerialID)">
