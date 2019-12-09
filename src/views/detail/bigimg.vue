@@ -35,7 +35,6 @@ export default {
         let id=ids*1
       this.getdetailList(id)
       }
-    // this.getdetailList(this.$route.query.SerialID)
   }
 }
 </script>

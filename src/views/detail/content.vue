@@ -2,26 +2,30 @@
   <div class="content">
       <!-- 详情页内tab切换 -->
     <div class="tab">
-      <span v-for="(item,index) in listData" :key="index" @click="tabclickFn(index)" :class="listIndex===index?'active':''">{{item}}</span>
+      <span v-for="(item,index) in years" :key="index" @click="tabclickFn(index,item)" :class="listIndex===index?'active':''">{{item}}</span>
     </div>
     <!-- 车款底价咨询 -->
     <div class="context">
-        <div class="countext" v-for="(item,index) in detailList.list&&detailList.list" :key="index">
+        <!-- {{currentList}} -->
+        <div class="countext" v-for="(item,index) in currentList" :key="index">
         <div class="text">
-            <p>{{item.exhaust_str}}/{{item.max_power_str}} {{item.inhale_type}}</p>
+            <p>{{item.key}}</p>
         </div>
         <div class="wrapper">
-            <div class="wrap">
+            <div class="wrap" v-for="(ite,inde) in item.list" :key="inde">
+                <div class="kuan">
                 <div class="left">
-                   <p>{{item.market_attribute.year}}款{{item.car_name}}</p>
-                   <span>{{item.horse_power}}马力7档{{item.trans_type}}</span>
+                   <p>{{ite.market_attribute.year}}款{{ite.car_name}}</p>
+                   <span>{{ite.horse_power}}马力7档{{ite.trans_type}}</span>
                 </div>
                 <div class="right">
-                    <span class="zhi">指导价 {{item.market_attribute.dealer_price_max}}</span>&nbsp;&nbsp; 
-                    <span class="startPrice">{{item.market_attribute.dealer_price_min}}起</span>
+                    <span class="zhi">指导价 {{ite.market_attribute.dealer_price_max}}</span>&nbsp;&nbsp; 
+                    <span class="startPrice">{{ite.market_attribute.dealer_price_min}}起</span>
                 </div>
+                </div>
+                <div class="box">询问底价</div>
             </div>
-            <div class="box">询问底价</div>
+            
         </div>
     </div>
 </div>
@@ -34,13 +38,19 @@ export default {
     data(){
         return{
             listIndex:0,
-            listData:["全部","2019"],
+            data:[]
         }
     },
     computed: {
         ...mapState({
-            detailList:state=>state.detail.detailList
-        })
+            detailList:state=>state.detail.detailList,
+            year:state=>state.detail.year,
+            currentList:state=>state.detail.currentList
+        }),
+        years(){
+              var x = new Set(this.year);
+            return [...x];
+        }
     },
     methods:{
         ...mapActions({
@@ -49,9 +59,17 @@ export default {
         reduceimg(){
           this.$router.push("/colorimg")
         },
-         tabclickFn(index){
-   this.listIndex=index
-  },
+         tabclickFn(index,item){
+         this.listIndex=index
+
+           console.log(item)
+        //  let array=this.detailList.value
+         
+        //  let arr=this.detailList.filter(ite=>ite.list.map(it=>it.market_attribute.year==item))
+        //   this.data.push(arr)
+        //  console.log(array)
+         
+        },
     }
 }
 </script>
@@ -89,40 +107,46 @@ export default {
 }
 .content .context .wrapper{
     width:100%;
-    background:#fff;
+   
 }
 .content .context .wrapper .wrap{
     width:100%;
-    display:flex;
+    margin-top:10px;
+     background:#fff;
 }
-.content .context .wrapper .wrap .left{
+.content .context .wrapper .wrap .kuan{
+    width:100%;
+     display:flex;
+     
+}
+.content .context .wrapper .wrap .kuan .left{
     width:50%;
 }
-.content .context .wrapper .wrap .left p{
+.content .context .wrapper .wrap .kuan .left p{
     color:#3D3D3D;
     font-size: 14px;
     padding:10px 0 10px 10px;
 }
-.content .context .wrapper .wrap .left span{
+.content .context .wrapper .wrap .kuan .left span{
     font-size: 13px;
     color:#BDBDBD;
     padding-left:10px;
 }
-.content .context .wrapper .wrap .right{
+.content .context .wrapper .wrap .kuan .right{
     width:50%;
     margin-top:15%;
 }
-.content .context .wrapper .wrap .right .zhi{
+.content .context .wrapper .wrap .kuan .right .zhi{
     color:#818181;
     font-size: 12px;
 }
-.content .context .wrapper .wrap .right .startPrice{
+.content .context .wrapper .wrap .kuan .right .startPrice{
     color:#FF2336;
     font-size: 15px;
   
     /* padding-right:5px; */
 }
-.content .context .box{
+.content .context .wrap .box{
     width:100%;
     height:40px;
     line-height: 40px;
