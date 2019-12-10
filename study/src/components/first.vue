@@ -28,7 +28,9 @@
           <p class="shengshi" >省市</p>
           <div v-for="(item,index) in cityList.data" :key="index" class="nameList" >
           <p @click="play">{{item.CityName}} 
-            <Dialog2 v-show="open"/>
+           <Dialog2 v-show="open">
+             <p v-for="(item,index) in cityList.data" :key="index"></p>
+           </Dialog2>
             <span>></span></p>
           </div>
          
@@ -73,9 +75,9 @@ methods:{
     this.city(),
     this.position()
   },
-  play(){
+  play(id){
     this.open=true
-    // this.city()
+    this.city(id)
 
   }
 },

@@ -19,7 +19,7 @@ export default {
 .left{
     width: 30%;
     height: 100%;
-    background: rgba(31, 30, 30, 0.5);
+    background: rgba(0,0,0,.05);
     position: fixed;
     left: 0;
     top: 0;
