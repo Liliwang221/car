@@ -27,9 +27,11 @@
         <div class="list">
           <p class="shengshi" >省市</p>
           <div v-for="(item,index) in cityList.data" :key="index" class="nameList" >
-          <p @click="play">{{item.CityName}} 
-           <Dialog2 v-show="open">
-             <p v-for="(item,index) in cityList.data" :key="index"></p>
+          <p @click="play(item.CityID)">{{item.CityName}} 
+            <!-- 第二个弹框 -->
+            {{proviceList}}
+           <Dialog2 v-show="open" :open="open">
+             
            </Dialog2>
             <span>></span></p>
           </div>
@@ -40,7 +42,9 @@
       
       <p class="bot"><button class="btn">询最低价</button></p> 
      </div>
-     <button class="person">选择报价经销商</button>
+     <p class="person"><button >选择报价经销商</button></p>
+     <StoreMen>
+     </StoreMen>
     
   </div>
 
@@ -49,9 +53,11 @@
 <script>
 import {mapActions,mapState} from 'vuex'
 import Dialog2 from './dialog2'
+import StoreMen from './storeMen'
 export default {
   components:{
-    Dialog2
+    Dialog2,
+    StoreMen
   },
   data(){
     return{
@@ -62,13 +68,15 @@ export default {
 computed:{
   ...mapState({
     cityList:state=>state.baojia.cityList,
-    clientList:state=>state.baojia.clientList
+    clientList:state=>state.baojia.clientList,
+    // proviceList:state=>state.baojia.proviceList
   })
 },
 methods:{
   ...mapActions({
     city:'baojia/city',
-    position:'baojia/position'
+    position:'baojia/position',
+    dialogList:'baojia/dialogList'
   }),
   start(){
     this.show=true,
@@ -77,7 +85,7 @@ methods:{
   },
   play(id){
     this.open=true
-    this.city(id)
+    this.dialogList(id)
 
   }
 },
@@ -94,6 +102,7 @@ methods:{
 html,body{
   width: 100%;
   height: 100%;
+  /* overflow: auto; */
 }
 .scroll-top-enter,.scroll-top-leave-to{
     transform: translate3d(0, 100%, 0)
@@ -113,6 +122,7 @@ html,body{
 .price{
   width: 100%;
   height: 100%;
+  /* overflow: auto; */
   /* background: #ddd; */
 }
 .img{
@@ -195,12 +205,18 @@ html,body{
   border: none;
   line-height: 30px;
  margin-left: 25px;
- margin-top: 10px;
+ margin-top: -10px;
+}
+.person button{
+  /* margin-top: 30px; */
+  border: none;
+  /* background: #fff; */
 }
 .person{
-  margin-top: 30px;
-  border: none;
-  background: #fff;
+  width: 100%;
+  height: 22px;
+  background: #ccc;
+  margin-top: 15px;
 }
 .log{
   width: 100%;

@@ -1,17 +1,34 @@
 <template>
 <div>
     
-   <div class="dialog2">
+   <div class="dialog2" >
        <div class="left"></div>
-       <div class="right"></div>
+       <div class="right">
+           <p v-for="(item,index) in proviceList.data" :key="index" @click="close">
+               {{item.CityName}}
+             </p>
+       </div>
   </div>  
 </div>
  
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
-//   propos:[]
+    props:["open"],
+
+    computed:{
+  ...mapState({
+    proviceList:state=>state.baojia.proviceList
+  })
+},
+methods:{
+    close(){
+        this.open=false
+    }
+}
 }
 </script>
 
