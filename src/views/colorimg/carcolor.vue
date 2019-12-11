@@ -29,7 +29,7 @@
     </transition>
 
     <!-- 图片轮播展示 -->
-
+    <div class="swiper"></div>
 
   </div>
 </template>
