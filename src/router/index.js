@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const Colorimg=()=>import("../views/colorimg")
 const Home=()=>import("../components/HelloWorld")
-const AllSmallImg=()=>import("../views/colorimg/allSmallImg")
+
 
 const routes = [
   {
@@ -19,9 +19,6 @@ const routes = [
   },{
     path:"/colorimg",
     component:Colorimg
-   },{
-     path:"/allimg",
-     component:AllSmallImg
    }
   //,{
   //   path:'/colors',

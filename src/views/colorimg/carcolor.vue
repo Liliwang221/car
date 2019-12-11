@@ -10,7 +10,7 @@
     </div>
  </div>
     <!-- 图片列表 -->
-
+    <Allcarimage v-if="showImageList"></Allcarimage>
 
     <!-- 颜色选择 -->
      <!-- 汽车颜色 -->
@@ -37,17 +37,19 @@
 <script>
 import Color from "./colors";
 import Carkuan from "./carkuan"
+import Allcarimage from "@/components/allSmallImg"
 import {mapActions} from "vuex";
 export default {
   components:{
-    Color,Carkuan
+    Color,Carkuan,Allcarimage
   },
   data(){
     return{
       showColor:false,
       showCar:false,
       colored:"颜色",
-      kuanshi:"款式"
+      kuanshi:"款式",
+      showImageList: false,
     }
   },
     props:["chuan"],
@@ -75,6 +77,7 @@ export default {
       ...mapActions({
       getAllcarimgList:"allcarimg/getAllcarimgList"
     })
+   
     },
     created(){
       let ids=this.$route.query.SerialID
@@ -93,7 +96,7 @@ export default {
 <style scoped>
 .carcolor{
   width:100%;
-  height:40px;
+  min-height:40px;
   background:#fff;
   margin-bottom:10px;
  position:-webkit-sticky;
@@ -102,9 +105,13 @@ export default {
  left:0;
  z-index: 9999;
 }
+.carcolor .classify{
+  width:100%;
+  min-height:40px;
+}
 .carcolor .classify .c-type{
   width:100%;
-  height:100%;
+  min-height:40px;
   display:flex;
   align-items: center;
   color:#454545;

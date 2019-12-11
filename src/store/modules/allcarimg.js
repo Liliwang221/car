@@ -1,8 +1,13 @@
 import {getAllcarimgList} from "@/services/index"
 const state={
     allcarimgList:{},
-    colorId:"",
-    carId:""
+    colorId:"",//颜色id
+    carId:"",//车款id
+    ImageID:"",//分类id
+    page:0,//当前页数
+    pageSize:30,//当前页数
+    imageList:[],//分类图片列表
+
 }
 const mutations={
     setAllcarimgList(state,payload){
@@ -13,7 +18,10 @@ const mutations={
       },
     setCarId(state, payload){
         state.carId = payload;
-      }
+      },
+    setImageId(state,payload){
+      state.ImageID=payload
+    }
 }
 const actions={
     async getAllcarimgList({commit},payload){

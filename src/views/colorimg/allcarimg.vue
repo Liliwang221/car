@@ -8,7 +8,7 @@
         <img :src="ite.Url.replace('{0}',1)"/>
       </div>
         <!-- 图片上的遮罩层 -->
-        <div class="reduce" @click="allSmallImgFn">
+        <div class="reduce" @click="clickImageID(item.Id)">
             <p class="p">{{item.Name}}</p>
              <p>{{item.Count}}></p>
         </div> 
@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import {mapState,mapActions} from "vuex"
+import {mapState,mapActions,mapMutations} from "vuex"
 export default {
   data(){
     return{
-      
+      showImageList:false
     }
   },
   computed:{
@@ -36,8 +36,14 @@ export default {
     ...mapActions({
       getAllcarimgList:"allcarimg/getAllcarimgList"
     }),
-    allSmallImgFn(){
-      this.$router.push("/allimg")
+     ...mapMutations({
+      setImageId:"allcarimg/setImageId"
+    }),
+    //点击分类进入分类列表
+    clickImageID(id){
+      console.log("133",id)
+      this.setImageId(id)
+      this.showImageList=true
     }
   },
   created(){
@@ -55,8 +61,7 @@ export default {
 <style scoped>
 .allcarimg{
   width:100%;
- height:95%;
-
+ height:92.5%;
   background:#fff;
 }
 .allcarimg .smallImg{
