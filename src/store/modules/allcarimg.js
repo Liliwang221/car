@@ -11,7 +11,7 @@ const mutations={
     setColorId(state, payload){
         state.colorId = payload;
       },
-      setCarId(state, payload){
+    setCarId(state, payload){
         state.carId = payload;
       }
 }
@@ -27,7 +27,6 @@ const actions={
           params.CarId = state.carId;
         }
         let res=await getAllcarimgList(params)
-        console.log(res.data.data)
         commit("setAllcarimgList",res.data)
     }
 }

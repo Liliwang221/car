@@ -1,21 +1,36 @@
 <template>
   <div class="carcolor">
+    <!-- 图片类型 -->
+    <div class="classify">
     <div class="c-type">
-      <p @click="colorFn">{{colored}}</p>|
-      <p @click="carkuanFn">款式</p>
+        <!-- 颜色 -->
+        <p class="colo" @click="colorFn">{{colored}}</p>|
+        <!-- 款式 -->
+        <p class="cark" @click="carkuanFn">{{kuanshi}}</p>
     </div>
+ </div>
+    <!-- 图片列表 -->
 
+
+    <!-- 颜色选择 -->
+     <!-- 汽车颜色 -->
     <transition name="scroll-top">
       <div class="wrap" v-if="showColor">
         <Color :showColor.sync="showColor" :a.sync="colored"></Color>
       </div>
     </transition>
 
+          <!-- 款式选择 -->
+          <!-- 汽车款式 -->
   <transition name="scroll-bottom">
       <div class="wrap" v-if="showCar">
-        <Carkuan :showCar.sync="showCar"></Carkuan>
+        <Carkuan :showCar.sync="showCar" :b.sync="kuanshi"></Carkuan>
       </div>
     </transition>
+
+    <!-- 图片轮播展示 -->
+
+
   </div>
 </template>
 
@@ -31,7 +46,8 @@ export default {
     return{
       showColor:false,
       showCar:false,
-      colored:"颜色"
+      colored:"颜色",
+      kuanshi:"款式"
     }
   },
     props:["chuan"],
@@ -84,15 +100,23 @@ export default {
  position:sticky;
  top:0;
  left:0;
- z-index: 999999999999;
+ z-index: 9999;
 }
-.carcolor .c-type{
+.carcolor .classify .c-type{
   width:100%;
   height:100%;
   display:flex;
   align-items: center;
-  justify-content: space-evenly;
   color:#454545;
+ 
+}
+.carcolor .c-type .colo{
+  width:50%;
+  text-align: center;
+}
+.carcolor .c-type .cark{
+  width:50%;
+  text-align: center;
 }
 .carcolor .wrap{
   width: 100%;

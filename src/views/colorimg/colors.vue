@@ -16,6 +16,7 @@
   </div>
 </template>
 
+
 <script>
 import {mapState,mapMutations} from "vuex"
 
@@ -45,16 +46,14 @@ export default {
     colorFun(ColorId,colorname){
       //汽车颜色
       this.$emit("update:a",colorname)
-
       //汽车图片id
       if(ColorId instanceof String){
         alert("")
       }else{
         let id=ColorId*1
-         this.setColorId(id)
+        this.setColorId(id)
       }
       this.$emit('update:showColor', false)
-      
     }
   },
   created(){

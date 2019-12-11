@@ -8,7 +8,7 @@
         <img :src="ite.Url.replace('{0}',1)"/>
       </div>
         <!-- 图片上的遮罩层 -->
-        <div class="reduce">
+        <div class="reduce" @click="allSmallImgFn">
             <p class="p">{{item.Name}}</p>
              <p>{{item.Count}}></p>
         </div> 
@@ -29,13 +29,16 @@ export default {
   },
   computed:{
     ...mapState({
-      allcarimgList:state=>state.allcarimg.allcarimgList
+      allcarimgList:state=>state.allcarimg.allcarimgList,
     })
   },
   methods:{
     ...mapActions({
       getAllcarimgList:"allcarimg/getAllcarimgList"
-    })
+    }),
+    allSmallImgFn(){
+      this.$router.push("/allimg")
+    }
   },
   created(){
    let ids=this.$route.query.SerialID
@@ -45,7 +48,6 @@ export default {
     let id=ids*1
   this.getAllcarimgList(id)
   }
-    
   }
 } 
 </script>
