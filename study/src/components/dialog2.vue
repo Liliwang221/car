@@ -1,7 +1,7 @@
 <template>
 <div>
     
-   <div class="dialog2" >
+   <div class="dialog2">
        <div class="left"></div>
        <div class="right">
            <p v-for="(item,index) in proviceList.data" :key="index">
@@ -14,21 +14,29 @@
 </template>
 
 <script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import {mapState} from 'vuex'
 
 export default {
-    
-
     computed:{
   ...mapState({
     proviceList:state=>state.baojia.proviceList
   })
-},
-methods:{
-    close(){
-        this.open=false
-    }
 }
+
 }
 </script>
 
