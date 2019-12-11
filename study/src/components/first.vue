@@ -30,7 +30,7 @@
           <p @click="play(item.CityID)">{{item.CityName}} 
             <!-- 第二个弹框 -->
             {{proviceList}}
-           <Dialog2 v-show="open" :open="open">
+           <Dialog2 v-show="open">
              
            </Dialog2>
             <span>></span></p>

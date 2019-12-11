@@ -4,7 +4,7 @@
    <div class="dialog2" >
        <div class="left"></div>
        <div class="right">
-           <p v-for="(item,index) in proviceList.data" :key="index" @click="close">
+           <p v-for="(item,index) in proviceList.data" :key="index">
                {{item.CityName}}
              </p>
        </div>
@@ -17,7 +17,7 @@
 import {mapState} from 'vuex'
 
 export default {
-    props:["open"],
+    
 
     computed:{
   ...mapState({
