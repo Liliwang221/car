@@ -86,7 +86,6 @@ export default {
     align-items: center;
     flex-wrap: nowrap;
     background:#fff;
-    overflow-x:scroll;
      margin-bottom:10px;
 }
 .colors .allyear p{

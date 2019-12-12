@@ -13,23 +13,28 @@
              <p>{{item.Count}}></p>
         </div> 
       </div>
+
     </div><div class="wrap" v-else>
       <p>还没有内容</p>
     </div>
+   
   </div>
 </template>
 
 <script>
+
 import {mapState,mapActions,mapMutations} from "vuex"
 export default {
   data(){
     return{
-      showImageList:false
+      // showImageList:false
     }
   },
+
   computed:{
     ...mapState({
       allcarimgList:state=>state.allcarimg.allcarimgList,
+      showImageList:state=>state.allcarimg.showImageList
     })
   },
   methods:{
@@ -37,23 +42,26 @@ export default {
       getAllcarimgList:"allcarimg/getAllcarimgList"
     }),
      ...mapMutations({
-      setImageId:"allcarimg/setImageId"
+      setImageId:"allcarimg/setImageId",
+      setshowImage:"allcarimg/setshowImage",
+      updateSerialID:"allcarimg/updateSerialID"
     }),
     //点击分类进入分类列表
     clickImageID(id){
       console.log("133",id)
       this.setImageId(id)
-      this.showImageList=true
+      this.setshowImage(true)
     }
   },
   created(){
-   let ids=this.$route.query.SerialID
-  if(ids instanceof String){
-    alert("")
-  }{
-    let id=ids*1
-  this.getAllcarimgList(id)
-  }
+    let ids=this.$route.query.SerialID
+    if(ids instanceof String){
+      alert("")
+    }else{
+      let id=ids*1
+    this.getAllcarimgList(id)
+    this.updateSerialID(id)
+    }
   }
 } 
 </script>

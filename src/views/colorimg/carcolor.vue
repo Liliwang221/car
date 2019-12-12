@@ -10,7 +10,7 @@
     </div>
  </div>
     <!-- 图片列表 -->
-    <Allcarimage v-if="showImageList"></Allcarimage>
+     <Allcarimage v-if="showImageList"></Allcarimage>
 
     <!-- 颜色选择 -->
      <!-- 汽车颜色 -->
@@ -35,10 +35,10 @@
 </template>
 
 <script>
+import Allcarimage from "@/components/allSmallImg"
 import Color from "./colors";
 import Carkuan from "./carkuan"
-import Allcarimage from "@/components/allSmallImg"
-import {mapActions} from "vuex";
+import {mapActions,mapState, mapMutations} from "vuex";
 export default {
   components:{
     Color,Carkuan,Allcarimage
@@ -49,7 +49,6 @@ export default {
       showCar:false,
       colored:"颜色",
       kuanshi:"款式",
-      showImageList: false,
     }
   },
     props:["chuan"],
@@ -63,7 +62,13 @@ export default {
            this.getAllcarimgList(id)
         }
       }
-  },  
+  }, 
+  computed:{
+    ...mapState({
+      showImageList:state=>state.allcarimg.showImageList
+    })
+
+  },
     methods:{
       colorFn(){
         this.showColor=true
@@ -76,8 +81,10 @@ export default {
       },
       ...mapActions({
       getAllcarimgList:"allcarimg/getAllcarimgList"
+    }),
+    ...mapMutations({
+      setshowImage:"allcarimg/setshowImage"
     })
-   
     },
     created(){
       let ids=this.$route.query.SerialID
