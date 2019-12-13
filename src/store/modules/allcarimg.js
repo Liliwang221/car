@@ -39,8 +39,23 @@ const mutations={
     },
     setCountimage(state,payload){
       state.count=payload.Count
-      state.imageList=payload.List
-    }
+      payload.ImageID && (state.ImageID = payload.ImageID);
+      // 实现上拉加载
+      if (state.page == 1){
+          state.imageList = payload.List;
+      }else{
+          state.imageList = state.imageList.concat(payload.List);
+      }
+      // state.imageList=payload.List
+    },
+    setCurrent(state,payload){
+      console.log(payload)
+      state.current=payload
+    },
+     // 修改当前分页
+     setPage(state, payload){
+      state.page = payload;
+  },
 
 }
 const actions={

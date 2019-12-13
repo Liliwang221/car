@@ -101,20 +101,12 @@ export default {
       loadMoreDispatch: "allcarimg/getImageTypeList"
     }),
     ...mapMutations({
-      // setCurrent: "allcarimg/setCurrent"
+      setCurrent: "allcarimg/setCurrent"
     }),
     async onPullingDown() {
-      // console.log('pullingdown...');
-      // setTimeout(()=>{
-      //     this.refreshDispatch(1);
-      // }, 10000);
       await this.refreshDispatch(1);
     },
     async onPullingUp() {
-      // console.log('pullingup...');
-      // setTimeout(()=>{
-      // this.loadMoreDispatch(this.page + 1);
-      // }, 10000);
       await this.loadMoreDispatch(this.page + 1);
     },
     showSwiper(index) {
