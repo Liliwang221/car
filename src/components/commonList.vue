@@ -1,6 +1,6 @@
 <template>
-<!--    
-     /**
+    <!-- 
+        /**
         * list 下拉刷新 加载更多
         * @props {
         *   list: {
@@ -13,7 +13,8 @@
         *   }
         * }
         * slotName: 'item' 显示列表项
-     */ -->
+        */
+    -->
     <div class="container">
         <div>
             <p class="top-tip">正在刷新中...</p>
@@ -34,9 +35,11 @@
 </template>
 
 <script>
-import BScroll from "better-scroll"
+import BScroll from 'better-scroll';
+import {mapActions} from 'vuex';
+
 export default {
- data(){
+    data(){
         return {
             isPullUpLoad: false
         }
@@ -57,6 +60,10 @@ export default {
         }
     },
     methods: {
+        // ...mapActions({
+        //     refreshDispatch: this.list.refreshDispatch,
+        //     loadMoreDispatch: this.list.loadMoreDispatch
+        // }),
         refreshDispatch(page){
             this.$store.dispatch(this.list.refreshDispatch, page)
         },
@@ -64,19 +71,21 @@ export default {
             this.$store.dispatch(this.list.loadMoreDispatch, page)
         }
     },
-mounted(){
-  this.scroll=new BScroll(".wrap",{
-        scrollY:true,
-        pullUpLoad:{
-            threshold:50
-        },
-        pullDownRefresh:{
-            threshold:50,
-            stop:20
-        },
-         click:true
-    }),
-    this.scroll.on('pullingUp', async ()=>{
+    mounted() {
+        this.scroll = new BScroll('.container',{
+            scrollY: true,
+            click: true,
+            // probeType: 1,
+            pullUpLoad: {
+                threshold: 50
+            },
+            pullDownRefresh: {
+              threshold: 50,
+              stop: 30
+            }
+        })
+
+        this.scroll.on('pullingUp', async ()=>{
             // 判断是否加载完全部数据
             if (this.list.count == this.list.value.length){
                 return;
@@ -98,14 +107,19 @@ mounted(){
 }
 </script>
 
-<style scoped>
-    .wrap{
-        width:100%;
-        height:100%;
-        overflow-y: scroll;
+<style lang="scss" scoped>
+    .container{
+        width: 100%;
+        height: 100%;
+        // overflow-y: scroll;
+        position: relative;
     }
-    .wrap>div{
-        height:2000px;
-        background:sienna;
+    .top-tip{
+        position: absolute;
+        top: -30px;
+        text-align: center;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
     }
 </style>

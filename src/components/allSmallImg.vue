@@ -1,75 +1,157 @@
 <template>
-  <div class="wrapper">
-    <CommonList :list="{
-      query:{},
-      limit:30,
-      count:count,
-      refreshDispatch:'',
-      loadMoreDispatch:'',
-      value:imageList}"
-      >
-   
-      </CommonList>
-     <scroll
-            ref="scroll"
-            :data="value"
-            :pullDownRefresh="pullDownRefreshObj"
-            :pullUpLoad="pullUpLoadObj"
-            @pullingDown="onPullingDown"
-            @pullingUp="onPullingUp"
-        >
-            <ul>
-                <span :key="index" @click="showSwiper(index)" v-for="(item, index) in imageList" :style="{backgroundImage: 'url('+item.Url.replace('{0}', item.LowSize)+')'}"/>
-            </ul>
-        </scroll>
-      
+  <div class="wrap">
+    <!-- <CommonList :list="{
+                    query: {page},
+                    limit: 30,
+                    count: count,
+                    refreshDispatch: 'pic/getImageTypeList',
+                    loadMoreDispatch: 'pic/getImageTypeList',
+                    value:value
+                }">           
+                    <template v-slot:default="slotProps">
+                        <ul>
+                            <span :key="index" v-for="(item, index) in slotProps.value" :style="{backgroundImage: 'url('+item.Url.replace('{0}', item.LowSize)+')'}"/>
+                        </ul>
+</template>
+    </CommonList>-->
+
+    <scroll
+      ref="scroll"
+      :data="value"
+      :pullDownRefresh="pullDownRefreshObj"
+      :pullUpLoad="pullUpLoadObj"
+      @pullingDown="onPullingDown"
+      @pullingUp="onPullingUp"
+    >
+      <ul>
+        <div
+          :key="index"
+          :data-bg="item.Url.replace('{0}', item.LowSize)"
+          @click="showSwiper(index)"
+          v-for="(item, index) in value"
+        />
+        <!-- :style="{backgroundImage: 'url('+item.Url.replace('{0}', item.LowSize)+')'}"/> -->
+      </ul>
+    </scroll>
   </div>
 </template>
 
 <script>
-import {mapActions,mapState} from "vuex"
-import CommonList from "./commonList"
+import { mapState, mapMutations, mapActions } from "vuex";
+// import CommonList from "./CommonList";
+import Scroll from "./better-scroll/scroll";
+//引入背景图懒加载
+import LazyLoad from "@/utils/lazyLoad";
 export default {
-  components:{
-    CommonList
-  },
-  computed:{
+  computed: {
     ...mapState({
-      imageList:state=>state.allcarimg.imageList,
-      count:state=>state.allcarimg.count
-    })
+      count: state => state.allcarimg.count,
+      value: state => state.allcarimg.imageList,
+      page: state => state.allcarimg.page
+    }),
+    pullDownRefreshObj: () => {
+      return {
+        threshold: 90,
+        stop: 50,
+        txt: "刷新成功"
+      };
+    },
+    pullUpLoadObj: () => {
+      return {
+        threshold: 50,
+        txt: {
+          more: "加载更多",
+          noMore: "没有更多数据了"
+        }
+      };
+    }
   },
-  methods:{
+  watch: {
+    pullDownRefreshObj: {
+      handler(val) {
+        const scroll = this.$refs.scroll.scroll;
+        if (val) {
+          scroll.openPullDown();
+        } else {
+          scroll.closePullDown();
+        }
+      },
+      deep: true
+    },
+    pullUpLoadObj: {
+      handler(val) {
+        const scroll = this.$refs.scroll.scroll;
+        if (val) {
+          scroll.openPullUp();
+        } else {
+          scroll.closePullUp();
+        }
+      },
+      deep: true
+    }
+  },
+  components: {
+   
+    Scroll
+  },
+  methods: {
     ...mapActions({
-      getImageTypeList:"allcarimg/getImageTypeList"
-    })
+      getImageTypeList: "allcarimg/getImageTypeList",
+      refreshDispatch: "allcarimg/getImageTypeList",
+      loadMoreDispatch: "allcarimg/getImageTypeList"
+    }),
+    ...mapMutations({
+      // setCurrent: "allcarimg/setCurrent"
+    }),
+    async onPullingDown() {
+      // console.log('pullingdown...');
+      // setTimeout(()=>{
+      //     this.refreshDispatch(1);
+      // }, 10000);
+      await this.refreshDispatch(1);
+    },
+    async onPullingUp() {
+      // console.log('pullingup...');
+      // setTimeout(()=>{
+      // this.loadMoreDispatch(this.page + 1);
+      // }, 10000);
+      await this.loadMoreDispatch(this.page + 1);
+    },
+    showSwiper(index) {
+      // 显示轮播
+      this.$emit("update:showImageSwiper", true);
+      // 修改current
+      this.setCurrent(index);
+    }
   },
-  mounted(){
-    this.getImageTypeList()
+  async mounted() {
+    await this.getImageTypeList();
+    new LazyLoad(".allcarimg");
   }
-}
+};
 </script>
 
-<style scoped>
-.wrapper{
-  width:100%;
- height:100%;
-  position:fixed;
-  top:0;
-  left:0;
-  background:#fff;
-  overflow-y: scroll;
-  display:flex;
-  flex-wrap:wrap;
+<style lang="scss" scoped>
+.wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
 }
-.wrapper .allimg{
-  width:32%;
-  border:1px solid #333;
-  margin:2px 2px;
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-.wrapper .allimg img{
-  width:100%;
-  height:100%;
-   height:100px; 
+ul div {
+  display: inline-block;
+  width: 32.7vw;
+  height: 32.7vw;
+  margin-bottom: 1vw;
+  background-size: cover;
+  background-position: center;
+  background-color: #eee;
 }
 </style>

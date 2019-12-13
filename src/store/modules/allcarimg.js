@@ -7,6 +7,7 @@ const state={
     count:"",//当前分类图片总数
     ImageID:"",//分类id
     page:1,//当前页数
+    current: 0,    // 轮播的当前图片
     pageSize:30,//当前页数
     imageList:[],//分类图片列表
     SerialID:""//车系id
