@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="storeList.data">
        <div v-for="(item,index) in storeList.data.list" :key="index" class="storeList">
            <span data-hover="hover" class="active">
                
