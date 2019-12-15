@@ -17,11 +17,9 @@
             <img :src="item1.CoverPhoto" alt />
           </p>
           <p class="name">{{item1.Name}}</p>
-<<<<<<< HEAD
         </div>
-=======
           </div>
-          
+    
        
        <!-- 弹框 -->
           <div class="dialog" v-show="show">
@@ -36,39 +34,16 @@
                       <img :src="item1.Picture" alt />  
                 </p>
                   <div class="left">
->>>>>>> 5ba48fa26a0685115569852d41929bf6dbfe2576
 
-        <!-- 弹框 -->
-        <div class="dialog" v-show="show">
-          <div v-for="(item,index) in dataList.data" :key="index">
-            <!-- {{item}} -->
-            <!-- <p class="GroupName">{{item.GroupName}}</p> -->
-
-            <!-- {{item.GroupList}} -->
-            <div
-              v-for="(item1,index1) in item.GroupList"
-              :key="index1"
-              class="content1"
-              @click="toDetail(item1.SerialID)"
-            >
-              <!-- {{item1}} -->
-              <p class="img">
-                <img :src="item1.Picture" alt />
-              </p>
-              <div class="left">
-                <p>{{item1.AliasName}}</p>
-                <p>{{item1.DealerPrice}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
         <!-- 右侧数据 -->
         <div class="right">
           <span v-for="(item,index) in arr" :key="index">{{item}}</span>
         </div>
        </div>
-      <!-- </div> -->
+      </div>
     </div>
+  </div>
+  </div>
   </div>
 </template>
 

@@ -20,10 +20,6 @@ const routes = [
     path:"/colorimg",
     component:Colorimg
    }
-  //,{
-  //   path:'/colors',
-  //   component:Colors
-  // }
 
 ]
 
