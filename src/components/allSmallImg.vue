@@ -1,20 +1,5 @@
 <template>
   <div class="wrap">
-    <!-- <CommonList :list="{
-                    query: {page},
-                    limit: 30,
-                    count: count,
-                    refreshDispatch: 'pic/getImageTypeList',
-                    loadMoreDispatch: 'pic/getImageTypeList',
-                    value:value
-                }">           
-                    <template v-slot:default="slotProps">
-                        <ul>
-                            <span :key="index" v-for="(item, index) in slotProps.value" :style="{backgroundImage: 'url('+item.Url.replace('{0}', item.LowSize)+')'}"/>
-                        </ul>
-</template>
-    </CommonList>-->
-
     <scroll
       ref="scroll"
       :data="value"
@@ -25,23 +10,21 @@
     >
       <ul>
         <div
-          :key="index"
-          :data-bg="item.Url.replace('{0}', item.LowSize)"
-          @click="showSwiper(index)"
           v-for="(item, index) in value"
+          :key="index"
+          :data-bg="item.Url.replace('{0}',item.LowSize)"
+          @click="showSwiper(index)"
         />
-        <!-- :style="{backgroundImage: 'url('+item.Url.replace('{0}', item.LowSize)+')'}"/> -->
       </ul>
     </scroll>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
-// import CommonList from "./CommonList";
-import Scroll from "./better-scroll/scroll";
+import { mapState, mapMutations, mapActions } from "vuex"
+import Scroll from "./better-scroll/scroll"
 //引入背景图懒加载
-import LazyLoad from "@/utils/lazyLoad";
+import LazyLoad from "@/utils/lazyLoad"
 export default {
   computed: {
     ...mapState({
@@ -55,6 +38,7 @@ export default {
         stop: 50,
         txt: "刷新成功"
       };
+      
     },
     pullUpLoadObj: () => {
       return {
@@ -91,7 +75,6 @@ export default {
     }
   },
   components: {
-   
     Scroll
   },
   methods: {
@@ -101,7 +84,8 @@ export default {
       loadMoreDispatch: "allcarimg/getImageTypeList"
     }),
     ...mapMutations({
-      setCurrent: "allcarimg/setCurrent"
+      setCurrent: "allcarimg/setCurrent",
+      setshowImageSwiper:"allcarimg/setshowImageSwiper"
     }),
     async onPullingDown() {
       await this.refreshDispatch(1);
@@ -111,6 +95,7 @@ export default {
     },
     showSwiper(index) {
       // 显示轮播
+      this.setshowImageSwiper(true)
       this.$emit("update:showImageSwiper", true);
       // 修改current
       this.setCurrent(index);
@@ -118,7 +103,7 @@ export default {
   },
   async mounted() {
     await this.getImageTypeList();
-    new LazyLoad(".allcarimg");
+    new LazyLoad(".wrap");
   }
 };
 </script>

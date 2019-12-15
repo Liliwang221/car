@@ -4,6 +4,7 @@ const state={
     colorId:"",//颜色id
     carId:"",//车款id
     showImageList:false,
+    showImageSwiper:false,
     count:"",//当前分类图片总数
     ImageID:"",//分类id
     page:1,//当前页数
@@ -56,6 +57,9 @@ const mutations={
      setPage(state, payload){
       state.page = payload;
   },
+  setshowImageSwiper(state,payload){
+    state.showImageSwiper=payload
+  }
 
 }
 const actions={
@@ -70,6 +74,7 @@ const actions={
           params.CarId = state.carId;
         }
         let res=await getAllcarimgList(params)
+        console.log(res)
         commit("setAllcarimgList",res.data)
     },
     // 图片分类列表的请求
@@ -81,6 +86,7 @@ const actions={
         pageSize:state.pageSize
       }
       let res=await getImageTypeList(params)
+      console.log(res)
       let {Count,List}=res.data.data
       commit("setCountimage",{Count,List})
     }

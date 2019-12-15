@@ -36,8 +36,7 @@
 
 <script>
 import BScroll from 'better-scroll';
-import {mapActions} from 'vuex';
-
+import {mapActions,mapState} from 'vuex';
 export default {
     data(){
         return {
@@ -52,6 +51,11 @@ export default {
             }
         }
     },
+    computed:{
+        ...mapState({
+            value:state=>state.allcarimg.imageList
+        })
+    },
     watch: {
         'list.value': function(newVal, oldVal){
             if (newVal !== oldVal){
@@ -60,10 +64,10 @@ export default {
         }
     },
     methods: {
-        // ...mapActions({
-        //     refreshDispatch: this.list.refreshDispatch,
-        //     loadMoreDispatch: this.list.loadMoreDispatch
-        // }),
+        ...mapActions({
+            // refreshDispatch: this.list.refreshDispatch,
+            // loadMoreDispatch: this.list.loadMoreDispatch
+        }),
         refreshDispatch(page){
             this.$store.dispatch(this.list.refreshDispatch, page)
         },

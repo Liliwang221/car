@@ -10,7 +10,6 @@
         </van-image-preview>
     </div>
 </template>
-
 <script>
 import {mapState, mapMutations, mapActions} from 'vuex'
 export default {
