@@ -6,7 +6,7 @@
        <p>{{detailList.market_attribute&&detailList.market_attribute.dealer_price}}</p>
        <span>指导价 {{detailList.market_attribute&&detailList.market_attribute.official_refer_price}}</span>
      </div>
-      <button>{{detailList.BottomEntranceTitle&&detailList.BottomEntranceTitle}}</button>
+      <button @click="select()">{{detailList.BottomEntranceTitle&&detailList.BottomEntranceTitle}}</button>
    </div>
   </div>
 </template>
@@ -25,6 +25,9 @@ computed: {
         }),
         reduceimg(){
           this.$router.push("/colorimg")
+        },
+        select(){
+          this.$router.push("/baojia")
         }
     }
 }
