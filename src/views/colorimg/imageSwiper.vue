@@ -8,7 +8,7 @@
             :show-indicators="false"
         >
             <van-swipe-item v-for="(image, index) in imageList" :key="index">
-                <img class="img" v-lazy="image.Url.replace('{0}', image.HighSize)" />
+                <img class="img" :src="image.Url.replace('{0}', image.HighSize)" />
             </van-swipe-item>
         </van-swipe>
 

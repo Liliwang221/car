@@ -24,7 +24,7 @@
             @pullingUp="onPullingUp"
         >
             <ul>
-                <span :key="index" @click="showSwiper(index)" v-for="(item, index) in value" :style="{backgroundImage: 'url('+item.Url.replace('{0}', item.LowSize)+')'}"/>
+                <span :key="index" @click="showSwiper(index,item.Count,item.List)" v-for="(item, index) in value" :style="{backgroundImage: 'url('+item.Url.replace('{0}', item.LowSize)+')'}"/>
             </ul>
         </Scroll>
     </div>
@@ -38,6 +38,11 @@
     } from 'vuex';
     import Scroll from './better-scroll/scroll';
     export default {
+        data(){
+            return {
+                showImageSwiper:false
+            }
+        },
         computed: {
             ...mapState({
                 count: state => state.allcarimg.count,
@@ -95,8 +100,11 @@
                 loadMoreDispatch: 'allcarimg/getImageTypeList'
             }),
             ...mapMutations({
-                setCurrent: 'allcarimg/setCurrent'
-            }),
+                setCurrent: 'allcarimg/setCurrent',
+                setPage:'allcarimg/setPage',
+                setImageListL:"allcarimg/setImageList",
+                setCountimage:"allcarimg/setCountimage"
+            }), 
             async onPullingDown() {
             //     console.log('pullingdown...');
             //     setTimeout(()=>{
@@ -109,14 +117,28 @@
                 // setTimeout(()=>{
                     // this.loadMoreDispatch(this.page + 1);
                 // }, 10000);
-                await this.loadMoreDispatch(this.page + 1);
+               console.log(this.page);
+               
+                this.setPage(this.page+1)
+                
+                await this.loadMoreDispatch(this.page+1);
             },
-            showSwiper(){
+            showSwiper(index, Count, List){
                 // 显示轮播
-                // this.$emit("update:showImageSwiper", true)
+                console.log(index,Count,List)
+                this.$emit("update:showImageSwiper", true)
                 // // 修改current
-                // this.setCurrent(index);
-            }
+                this.setCurrent(index);
+                this.setImageListL(true)
+                // this.showImageSwiper=true
+                   this.setCurrent(index);
+                this.setCountimage({
+                    Count,
+                    List, 
+                });
+                this.showImageSwiper = true;
+                console.log(this.value)
+            },
         },
         mounted() {
             this.getPictureList();

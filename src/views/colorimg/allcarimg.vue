@@ -5,7 +5,7 @@
     <div class="smallImg" v-for="(item,index) in allcarimgList.data" :key="index">
       <!-- 渲染汽车展示小图片 -->
       <div class="imgs" v-for="(ite,i) in item.List" :key="i">
-        <img :src="ite.Url.replace('{0}',1)"/>
+        <img v-lazy="ite.Url.replace('{0}',1)"   @click.self="showSwiper(i, item.Count, item.List, item.Id)"/>
       </div>
         <!-- 图片上的遮罩层 -->
         <div class="reduce" @click="clickImageID(item.Id)">
@@ -17,20 +17,34 @@
     </div><div class="wrap" v-else>
       <p>还没有内容</p>
     </div>
-   
+   <ImageSwiper  v-if="showImageSwiper" :showImageSwiper.sync="showImageSwiper"></ImageSwiper>
   </div>
 </template>
 
 <script>
-
+import ImageSwiper from "./imageSwiper.vue"
+// import ImagePreview from '@/views/ImagePreview.vue';
+// import LazyLoad from '@/utils/lazyLoad';
 import {mapState,mapActions,mapMutations} from "vuex"
+import Vue from 'vue';
+import { Lazyload } from 'vant';
+Vue.use(Lazyload, {
+  
+  error:'https://img.yzcdn.cn/vant/apple-1.jpg',
+   loading:'https://img.yzcdn.cn/vant/apple-2.jpg'
+  
+});
 export default {
   data(){
     return{
       // showImageList:false
+      showImageSwiper:false
     }
   },
-
+components:{
+  ImageSwiper,
+  // ImagePreview
+},
   computed:{
     ...mapState({
       allcarimgList:state=>state.allcarimg.allcarimgList,
@@ -44,13 +58,26 @@ export default {
      ...mapMutations({
       setImageId:"allcarimg/setImageId",
       setshowImage:"allcarimg/setshowImage",
-      updateSerialID:"allcarimg/updateSerialID"
+      updateSerialID:"allcarimg/updateSerialID",
+      setCurrent:"allcarimg/setCurrent",
+      setImageList:"allcarimg/setImageList",
+      setCountimage:"allcarimg/setCountimage",
     }),
+      showSwiper(index, Count, List, ImageID){
+      this.setCurrent(index);
+      this.setCountimage({
+        Count,
+        List,
+        ImageID
+      });
+      this.showImageSwiper = true;
+    },
     //点击分类进入分类列表
     clickImageID(id){
       this.setImageId(id)
-      this.setshowImage(true)
-    }
+      this.setImageList(true)
+    },
+  
   },
   created(){
     let ids=this.$route.query.SerialID
@@ -61,7 +88,9 @@ export default {
     this.getAllcarimgList(id)
     this.updateSerialID(id)
     }
+      // new LazyLoad('.allcarimg');
   }
+  
 } 
 </script>
 

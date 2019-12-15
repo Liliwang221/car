@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Detail from "../views/detail"
 Vue.use(VueRouter)
-
+// import Detail from "../views/detail"
+const Detail=()=>import("../views/detail")
 const Colorimg=()=>import("../views/colorimg")
 const Home=()=>import("../components/HelloWorld")
 

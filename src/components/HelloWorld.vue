@@ -6,7 +6,6 @@
       <!-- <div v-if="list.length!=0"> -->
       <div v-for="(item,index) in list" :key="index" class="box1">
         <p class="title">{{item.title}}</p>
-
         <div
           v-for="(item1,index1) in item.children"
           :key="index1"

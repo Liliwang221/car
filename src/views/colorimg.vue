@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import {mapState,mapActions} from "vuex"
+import {mapState,mapActions,mapMutations} from "vuex"
 // 汽车颜色、款式
 import Carcolor from "./colorimg/carcolor"
 //汽车图片
@@ -27,10 +27,13 @@ export default {
   methods:{
     ...mapActions({
      getcolorList:"carcolor/getcolorList"
+    }),
+    ...mapMutations({
+      setImageList:"allcarimg/setImageList",
+       setCurrent:"allcarimg/setCurrent"
     })
   },
   created(){
-    // console.log(this.$store)
     this.getcolorList()
   }
 }
@@ -41,5 +44,6 @@ export default {
   width:100%;
   height:100%;
   background:#eee;
+  
 }
 </style>

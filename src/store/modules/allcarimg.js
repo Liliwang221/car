@@ -31,7 +31,7 @@ const mutations={
       state.ImageID=payload
     },
     //图片分类列表
-    setshowImage(state,payload){
+    setImageList(state,payload){
       state.showImageList=payload
     },
     //设置SerialID
@@ -39,6 +39,7 @@ const mutations={
       state.SerialID=payload
     },
     setCountimage(state,payload){
+      console.log(payload)
       state.count=payload.Count
       payload.ImageID && (state.ImageID = payload.ImageID);
       // 实现上拉加载
@@ -50,7 +51,6 @@ const mutations={
       // state.imageList=payload.List
     },
     setCurrent(state,payload){
-      console.log(payload)
       state.current=payload
     },
      // 修改当前分页
@@ -59,6 +59,9 @@ const mutations={
   },
   setshowImageSwiper(state,payload){
     state.showImageSwiper=payload
+  },
+  setshowImage(state,payload){
+    state.imageList=payload
   }
 
 }
@@ -74,7 +77,6 @@ const actions={
           params.CarId = state.carId;
         }
         let res=await getAllcarimgList(params)
-        console.log(res)
         commit("setAllcarimgList",res.data)
     },
     // 图片分类列表的请求
@@ -83,11 +85,12 @@ const actions={
         SerialID:state.SerialID,
         ImageID:state.ImageID,
         page:state.page,
-        pageSize:state.pageSize
+        pageSize:state.pageSize,
+        // Count:state.count
       }
       let res=await getImageTypeList(params)
-      console.log(res)
       let {Count,List}=res.data.data
+      // console.log(Count,List)
       commit("setCountimage",{Count,List})
     }
 }
