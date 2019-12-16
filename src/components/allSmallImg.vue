@@ -98,7 +98,7 @@ export default {
       this.setshowImageSwiper(true)
       this.$emit("update:showImageSwiper", true);
       // 修改current
-      this.setCurrent(index);
+      this.setCurrent(index);``
     }
   },
   async mounted() {
