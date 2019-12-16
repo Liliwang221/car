@@ -26,13 +26,10 @@ computed: {
         reduceimg(){
           this.$router.push("/colorimg")
         },
-<<<<<<< HEAD
-        
-=======
+
         select(){
           this.$router.push("/baojia")
         }
->>>>>>> 0783eeb779ada8af1c3be95bae97b6bfbdaf447f
     }
 }
 </script>
