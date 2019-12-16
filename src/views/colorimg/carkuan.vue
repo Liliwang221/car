@@ -5,7 +5,7 @@
       </div>
 <!-- tab切换每年的车款 -->
       <div class="wrapper">
-          <span v-for="(item,index) in years" :key="index">{{item}}</span>
+          <span v-for="(item,index) in years" :key="index"  @click="yearclickFn(index,item)" :class="yearIndex==index?'active':''">{{item}}</span>
       </div>
         <!-- 每个车款的性能 -->
             <div class="context">
@@ -39,7 +39,8 @@ export default {
  props:["showCar","b"],
 data(){
      return{
-        carid:""
+        carid:"",
+        yearIndex:0
      }
 },
 computed:{
@@ -59,8 +60,16 @@ methods:{
         getAllcarimgList:"allcarimg/getAllcarimgList"
     }),
     ...mapMutations({
-        setCarId:"allcarimg/setCarId"
+        setCarId:"allcarimg/setCarId",
+        setCurrent:"allcarimg/setCurrent"
     }),
+    yearclickFn(index,item){
+        
+        this.yearIndex=index
+        this.setCurrent(item)
+            this.getdetailList(this.$route.query.SerialID)
+          
+    },
     carkuanFn(carId,carname){
       this.$emit("update:b", carname)
       this.carid=carId

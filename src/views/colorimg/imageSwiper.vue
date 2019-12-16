@@ -29,7 +29,8 @@ export default {
     },
     methods: {
         ...mapMutations({
-            setCurrent: 'allcarimg/setCurrent'
+            setCurrent: 'allcarimg/setCurrent',
+            setPage:"allcarimg/setPage"
         }),
         ...mapActions({
             getImageTypeList: 'allcarimg/getImageTypeList'
@@ -37,10 +38,13 @@ export default {
         change(index){
             // 提前两张加载下一页图片
             if (index > this.imageList.length-2){
+                console.log(this.imageList.length-2)
                 if (this.imageList.length < 30){
                     this.getImageTypeList(1)
                 }else{
+                    this.setPage(this.page+1)
                     this.getImageTypeList(this.page + 1);
+                     
                 }
             }
             this.setCurrent(index);

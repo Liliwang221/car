@@ -25,7 +25,8 @@ computed: {
         }),
         reduceimg(){
           this.$router.push("/colorimg")
-        }
+        },
+        
     }
 }
 </script>

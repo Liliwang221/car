@@ -27,7 +27,7 @@
               <p class="GroupName">{{item.GroupName}}</p>
               
               <!-- {{item.GroupList}} -->
-              <div v-for="(item1,index1) in item.GroupList" :key="index1" class="content1"  @click="toDetail(item1.SerialID)">
+              <div v-for="(item1,index1) in item.GroupList" :key="index1" class="content1"  @click="toDetail(item1.SerialID,index1)">
               <!-- {{item1}} -->
                    <p class="img">
                       <img :src="item1.Picture" alt />  
@@ -79,6 +79,7 @@ export default {
     //跳转到详情页面
     toDetail(SerialID) {
       this.$router.push({ path:"/detail", query:{SerialID:SerialID}});
+      // _hmt.push(['_trackEvent', "首页", "滚动层",index1]);
       // console.log(this.$route)
     }
   },

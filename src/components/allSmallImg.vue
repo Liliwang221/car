@@ -24,7 +24,7 @@
             @pullingUp="onPullingUp"
         >
             <ul>
-                <span :key="index" @click="showSwiper(index,item.Count,item.List)" v-for="(item, index) in value" :style="{backgroundImage: 'url('+item.Url.replace('{0}', item.LowSize)+')'}"/>
+                <span :key="index" @click="showSwiper(index,item)" v-for="(item, index) in value" :style="{backgroundImage: 'url('+item.Url.replace('{0}', item.LowSize)+')'}"/>
             </ul>
         </Scroll>
     </div>
@@ -123,21 +123,15 @@
                 
                 await this.loadMoreDispatch(this.page+1);
             },
-            showSwiper(index, Count, List){
+            showSwiper(index){
                 // 显示轮播
-                console.log(index,Count,List)
-                this.$emit("update:showImageSwiper", true)
+                // this.$emit("update:showImageSwiper", true)
                 // // 修改current
                 this.setCurrent(index);
                 this.setImageListL(true)
                 // this.showImageSwiper=true
                    this.setCurrent(index);
-                this.setCountimage({
-                    Count,
-                    List, 
-                });
                 this.showImageSwiper = true;
-                console.log(this.value)
             },
         },
         mounted() {
