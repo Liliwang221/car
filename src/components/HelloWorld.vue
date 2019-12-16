@@ -44,11 +44,11 @@
           </div>
         </div>
         <!-- 右侧数据 -->
-         <NavList>
-           <!-- <div class="right">
+        
+           <div class="right">
            <span v-for="(item,index) in arr" :key="index">{{item}}</span>
-        </div> -->
-         </NavList>
+        </div>
+        
         
        </div>
       <!-- </div> -->
@@ -58,10 +58,10 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import NavList from './navList'
+// import NavList from './navList'
 export default {
   components:{
-   NavList
+  //  NavList
   },
   data() {
     return {

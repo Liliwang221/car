@@ -41,7 +41,7 @@ export default {
     }),
     //点击分类进入分类列表
     clickImageID(id){
-      console.log("133",id)
+      // console.log("133",id)
       this.setImageId(id)
       this.showImageList=true
     }
