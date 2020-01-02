@@ -50,7 +50,7 @@ const mutations={
       // state.imageList=payload.List
     },
     setCurrent(state,payload){
-      console.log(payload)
+      // console.log(payload)
       state.current=payload
     },
      // 修改当前分页
@@ -74,7 +74,7 @@ const actions={
           params.CarId = state.carId;
         }
         let res=await getAllcarimgList(params)
-        console.log(res)
+        // console.log(res)
         commit("setAllcarimgList",res.data)
     },
     // 图片分类列表的请求
@@ -86,7 +86,7 @@ const actions={
         pageSize:state.pageSize
       }
       let res=await getImageTypeList(params)
-      console.log(res)
+      // console.log(res)
       let {Count,List}=res.data.data
       commit("setCountimage",{Count,List})
     }

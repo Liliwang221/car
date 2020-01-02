@@ -17,6 +17,7 @@
         />
       </ul>
     </scroll>
+   
   </div>
 </template>
 
@@ -25,7 +26,13 @@ import { mapState, mapMutations, mapActions } from "vuex"
 import Scroll from "./better-scroll/scroll"
 //引入背景图懒加载
 import LazyLoad from "@/utils/lazyLoad"
+
 export default {
+  data(){
+    return {
+      // showImageSwiper:true
+    }
+  },
   computed: {
     ...mapState({
       count: state => state.allcarimg.count,
@@ -76,6 +83,7 @@ export default {
   },
   components: {
     Scroll
+   
   },
   methods: {
     ...mapActions({
@@ -98,7 +106,7 @@ export default {
       this.setshowImageSwiper(true)
       this.$emit("update:showImageSwiper", true);
       // 修改current
-      this.setCurrent(index);``
+      this.setCurrent(index);
     }
   },
   async mounted() {

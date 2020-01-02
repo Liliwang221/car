@@ -29,7 +29,8 @@
     </transition>
 
     <!-- 图片轮播展示 -->
-    <div class="swiper"></div>
+    <div class="swiper"> </div>
+    <Swiper v-if="showImageSwiper"></Swiper>
 
   </div>
 </template>
@@ -39,9 +40,11 @@ import Allcarimage from "@/components/allSmallImg"
 import Color from "./colors";
 import Carkuan from "./carkuan"
 import {mapActions,mapState, mapMutations} from "vuex";
+import Swiper from "../colorimg/imageSwiper"
 export default {
+  
   components:{
-    Color,Carkuan,Allcarimage
+    Color,Carkuan,Allcarimage,Swiper
   },
   data(){
     return{
@@ -49,6 +52,7 @@ export default {
       showCar:false,
       colored:"颜色",
       kuanshi:"款式",
+      // showImageSwiper:false
     }
   },
     props:["chuan"],
@@ -65,7 +69,8 @@ export default {
   }, 
   computed:{
     ...mapState({
-      showImageList:state=>state.allcarimg.showImageList
+      showImageList:state=>state.allcarimg.showImageList,
+      showImageSwiper:state=>state.allcarimg.showImageSwiper
     })
 
   },
@@ -83,7 +88,8 @@ export default {
       getAllcarimgList:"allcarimg/getAllcarimgList"
     }),
     ...mapMutations({
-      setshowImage:"allcarimg/setshowImage"
+      setshowImage:"allcarimg/setshowImage",
+      setshowImageSwiper:"allcarimg/setshowImageSwiper"
     })
     },
     created(){
@@ -94,6 +100,7 @@ export default {
           let id=ids*1
            this.getAllcarimgList(id)
         }
+        this.setshowImageSwiper(false)
     }
 }
 

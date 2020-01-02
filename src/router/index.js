@@ -9,6 +9,11 @@ const Home=()=>import("../components/HelloWorld")
 
 const routes = [
   {
+    path:"/",
+    component:Home,
+    rediracet:"/home"
+  },
+  {
     path:"/home",
     // name:"Home",
     component:Home
@@ -20,10 +25,6 @@ const routes = [
     path:"/colorimg",
     component:Colorimg
    }
-  //,{
-  //   path:'/colors',
-  //   component:Colors
-  // }
 
 ]
 
